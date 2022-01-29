@@ -1,0 +1,17 @@
+{% extends 'base_bootstrap.html' %}
+{% block content %}
+    <h1>PICS</h1>
+    <p>
+        {% if pic_list %}
+            <ul>
+            {% for pic in pic_list %}
+                <li>
+                    <a href="{% url 'pics:pic_detail' pic.id %}">{{ pic.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+
+        {% endif %}
+    </p>
+
+{% endblock %}

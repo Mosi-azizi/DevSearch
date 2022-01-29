@@ -1,0 +1,15 @@
+h1{
+    color: red;
+}
+p{
+    color: blue;
+}
+body{
+    background:#00ad5f;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
