@@ -19,7 +19,7 @@ from django.urls import path,include
 from django.views.generic.base import TemplateView
 from . import settings
 from users.views import profiles
-
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +29,13 @@ urlpatterns = [
     path('',include('pics.urls')),
     path('',include('products.urls')),
     path('projects/',include('dennislvy.urls')),
-    path('users/',include('users.urls'))
+    path('users/',include('users.urls')),
+
+    path('reset_password',auth_views.PasswordResetView.as_view(template_name='reset_password.html'),name = "reset_password"),
+    path('reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name='reset_password_sent.html'), name="password_reset_done"),
+    path('reset/<uidb64>/<token>',auth_views.PasswordResetConfirmView.as_view(),name="password_reset_confirm"),
+    path('reset_password_complete/',auth_views.PasswordResetCompleteView.as_view(),name="password_reset_complete")
+
 ]
 
 if settings.DEBUG:
