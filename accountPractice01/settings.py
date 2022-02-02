@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-p(vl&1s3tqe#m=radw)mzdwx!xlb1&m_#qd34nu_q6rfuwxcr^
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1']
+USE_TZ = 'Asia/Tehran'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Application definition
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
     'pics',
     'dbconnect',
     'dennislvy',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'rest_framework',
 
 
 ]
