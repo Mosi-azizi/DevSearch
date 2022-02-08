@@ -20,7 +20,7 @@ def projects(request):
 
 def project (request, pk):
     projectobj = Project.objects.get(id=pk)
-    tags = projectobj.tag.all()
+    tags = projectobj.tags.all()
     form = ReviewForm()
     if request.method == 'POST':
         form = ReviewForm(request.POST)
