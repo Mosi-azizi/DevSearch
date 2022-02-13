@@ -7,10 +7,10 @@ class ProjectFrom(ModelForm):
     class Meta:
         model = Project
         # fields = '__all__'
-        fields = ['title','featured_images','description','demo_link','source_link','tags']
+        fields = ['title','featured_images','description','demo_link','source_link']
 
         widgets = {
-            'tag' : forms.CheckboxSelectMultiple()
+            'tags' : forms.CheckboxSelectMultiple()
         }
 
     def __init__(self, *args , **kwargs):
