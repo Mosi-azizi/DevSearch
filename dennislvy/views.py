@@ -3,7 +3,7 @@
 from django.shortcuts import render,redirect
 from .models import Project , Tag
 from django.views.generic import ListView
-from .forms import ProjectFrom,ReviewForm
+from .forms import ProjectForm,ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .utils import searchProjects,paginatProjects
@@ -43,21 +43,22 @@ class ProjectListView(ListView):
     context_object_name = 'projectslv'
 
 @login_required(login_url='users:login')
-def createProject(request):
+def createProject(request, pk):
     profile = request.user.profile
-    form = ProjectFrom()
+    form = ProjectForm()
+
     if request.method == 'POST':
-        newtags = request.POST.get('newtags').replac(',', " ").split()
-        # print(request.POST)
-        form = ProjectFrom(request.POST , request.FILES)
+        newtags = request.POST.get('newtags').replace(',', " ").split()
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
             project.owner = profile
             project.save()
+
             for tag in newtags:
-               tag, created = Tag.objects.get_or_create(name=tag)
-               project.tags.add()
-            return redirect('dennislvy:projects')
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
+            return redirect('users:account')
     context = {
         'form':form
     }
@@ -66,25 +67,23 @@ def createProject(request):
 @login_required(login_url='users:login')
 def updateProject(request,pk):
     profile = request.user.profile
-    project =profile.project_set.get(id=pk)
-    form = ProjectFrom(instance=project)
+    project = profile.project_set.get(id=pk)
+    form = ProjectForm(instance=project)
 
     if request.method == 'POST':
-        # print(request.POST)
         newtags = request.POST.get('newtags').replace(',', " ").split()
-        # print('DATA',newtags)
 
-        form = ProjectFrom(request.POST,request.FILES,instance=project)
+        form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
-            project =form.save()
+            project = form.save()
             for tag in newtags:
-               tag, created = Tag.objects.get_or_create(name=tag)
-               project.tags.add()
-
+                tag, created = Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
 
             return redirect('users:account')
     context = {
-        'form':form
+        'form':form,
+        'project':project
     }
     return  render(request,'projects/project_form.html',context)
 
