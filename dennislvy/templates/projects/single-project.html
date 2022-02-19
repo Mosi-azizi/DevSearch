@@ -72,14 +72,12 @@
                 <a href="{% url 'users:login'%}?next={{ request.path }}">Please login to leave a review</a>
             {% endif %}
             <div class="commentList">
-
                 {% for review in project.review_set.all %}
                 {% if review.body %}
                 <div class="comment">
                 <a href="{% url 'users:user-profile'  review.owner.id %}">
                   <img class="avatar avatar--md" src="{{ review.owner.profile_images.url }}" alt="user" />
                 </a>
-
                 <div class="comment__details">
                   <a href="{% url 'users:user-profile' review.owner.id %}" class="comment__author">{{ review.owner.name }}</a>
                   <p class="comment__info">
@@ -89,10 +87,7 @@
               </div>
                     {% endif %}
                 {% endfor %}
-
             </div>
-
-
           </div>
         </div>
       </div>
