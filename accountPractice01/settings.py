@@ -147,10 +147,10 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'devsearch',
-#         'USER': 'postgres',
-#         'PASSWORD': '123456',
-#         'HOST': 'myPostgresDB',
-#         'PORT': '5432',
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASS'),
+#         'HOST': os.environ.get('DB_HOST'),
+#         'PORT': os.environ.get('DB_PORT'),
 #
 #     }
 # }
